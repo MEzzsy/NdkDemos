@@ -13,11 +13,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        externalNativeBuild {
-            cmake {
-                cppFlags "-std=c++11"//指定C++版本
-            }
-        }
     }
 
     buildTypes {
@@ -28,10 +23,13 @@ android {
     }
 
     externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"//指定Cmake版本
+        ndkBuild{
+            path file('src/main/cpp/Android.mk')
         }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
 

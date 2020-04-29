@@ -2,13 +2,21 @@ package com.mezzsy.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mezzsy.myapplication.hello.HelloActivity;
+import com.mezzsy.myapplication.zcommon.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+    private ListView mListView;
+    private List<String> mTitleList;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -17,19 +25,30 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mListView = findViewById(R.id.list_view);
 
-        // Example of a call to a native method
-        TextView tv = findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        mTitleList = new ArrayList<>(ActivityConfig.ACTIVITY_MAP.keySet());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
+                android.R.layout.simple_expandable_list_item_1, mTitleList);
+
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener((parent, view, position, id) -> {
+            String title = mTitleList.get(position);
+            Class<? extends BaseActivity> activityClass = ActivityConfig.ACTIVITY_MAP.get(title);
+            Intent intent = new Intent(MainActivity.this, activityClass);
+            startActivity(intent);
+        });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Intent intent = new Intent(this, HelloActivity.class);
-        startActivity(intent);
+        Log.i(TAG, "onResume: NDK test " + stringFromJNI());
+        mListView.setSelection(mTitleList.size() - 1);
     }
 
     /**

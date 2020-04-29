@@ -3,11 +3,10 @@ package com.mezzsy.myapplication.hello;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.mezzsy.myapplication.R;
+import com.mezzsy.myapplication.zcommon.BaseActivity;
 
-public class HelloActivity extends AppCompatActivity {
+public class HelloActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
