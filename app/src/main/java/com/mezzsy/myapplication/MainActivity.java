@@ -1,9 +1,12 @@
 package com.mezzsy.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.mezzsy.myapplication.hello.HelloActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = new Intent(this, HelloActivity.class);
+        startActivity(intent);
     }
 
     /**
