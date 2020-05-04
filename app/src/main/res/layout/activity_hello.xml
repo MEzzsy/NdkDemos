@@ -7,10 +7,10 @@
     tools:context=".hello.HelloActivity">
 
     <TextView
-        android:id="@+id/tv_text"
+        android:id="@+id/tv_log"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:textColor="@color/black"/>
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 </LinearLayout>

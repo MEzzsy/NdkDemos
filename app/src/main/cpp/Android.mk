@@ -20,4 +20,5 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE := hello
 LOCAL_SRC_FILES := hello-lib.cpp
+LOCAL_LDLIBS += -llog	#增加这行代码  -l<log库文件>
 include $(BUILD_SHARED_LIBRARY)

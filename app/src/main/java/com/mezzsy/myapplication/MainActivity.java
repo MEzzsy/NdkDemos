@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
     static {
-        System.loadLibrary("native-lib");
+        System.loadLibrary("native");
     }
 
     @Override
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(TAG, "onResume: NDK test " + stringFromJNI());
+        Log.i(TAG, "onResume: NDK test: " + stringFromJNI());
         mListView.setSelection(mTitleList.size() - 1);
     }
 
