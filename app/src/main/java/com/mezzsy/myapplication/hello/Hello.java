@@ -5,7 +5,7 @@ public class Hello {
         System.loadLibrary("hello");
     }
 
-    private int mHelloInt = 123;
+    private int mHelloInt = 1234;
 
     private static String sHelloString = "zzsy nb";
 

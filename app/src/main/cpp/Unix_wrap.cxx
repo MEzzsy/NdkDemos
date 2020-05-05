@@ -232,13 +232,148 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 #define SWIG_contract_assert(nullreturn, expr, msg) if (!(expr)) {SWIG_JavaThrowException(jenv, SWIG_JavaIllegalArgumentException, msg); return nullreturn; } else
 
 
-/*包含POSIX操作系统API.*/
+//包含POSIX操作系统API
 #include <unistd.h>
+
+
+
+//全局变量
+int global_int;
+
+//结构体
+struct Point{
+    int x;
+    int y;
+};
 
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+SWIGEXPORT void JNICALL Java_com_mezzsy_swig_UnixJNI_global_1int_1set(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  int arg1 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int)jarg1; 
+  global_int = arg1;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_mezzsy_swig_UnixJNI_global_1int_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (int)global_int;
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_mezzsy_swig_UnixJNI_Point_1x_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+  Point *arg1 = (Point *) 0 ;
+  int arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(Point **)&jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->x = arg2;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_mezzsy_swig_UnixJNI_Point_1x_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  Point *arg1 = (Point *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(Point **)&jarg1; 
+  result = (int) ((arg1)->x);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_mezzsy_swig_UnixJNI_Point_1y_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+  Point *arg1 = (Point *) 0 ;
+  int arg2 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(Point **)&jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->y = arg2;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_mezzsy_swig_UnixJNI_Point_1y_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jint jresult = 0 ;
+  Point *arg1 = (Point *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(Point **)&jarg1; 
+  result = (int) ((arg1)->y);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_com_mezzsy_swig_UnixJNI_new_1Point(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  Point *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (Point *)new Point();
+  *(Point **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_com_mezzsy_swig_UnixJNI_delete_1Point(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  Point *arg1 = (Point *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(Point **)&jarg1; 
+  delete arg1;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_mezzsy_swig_UnixJNI_CONST_1VALUE_11_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (int)(100);
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_com_mezzsy_swig_UnixJNI_CONST_1VALUE_12_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (int)(200);
+  jresult = (jint)result; 
+  return jresult;
+}
+
 
 SWIGEXPORT jlong JNICALL Java_com_mezzsy_swig_UnixJNI_getuid(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
