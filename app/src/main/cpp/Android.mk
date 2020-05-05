@@ -21,4 +21,12 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := hello
 LOCAL_SRC_FILES := hello-lib.cpp
 LOCAL_LDLIBS += -llog	#增加这行代码  -l<log库文件>
+
+MY_SWIG_PACKAGE:=com.mezzsy.swig
+MY_SWIG_INTERFACES:=Unix.i
+MY_SWIG_TYPE:=cxx
+
+include $(LOCAL_PATH)/my-swig-generate.mk
+
+
 include $(BUILD_SHARED_LIBRARY)
