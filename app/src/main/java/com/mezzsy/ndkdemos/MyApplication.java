@@ -1,4 +1,4 @@
-package com.mezzsy.myapplication;
+package com.mezzsy.ndkdemos;
 
 import android.app.Application;
 

@@ -1,4 +1,4 @@
-package com.mezzsy.myapplication.hello;
+package com.mezzsy.ndkdemos.hello;
 
 public class Hello {
     static {
@@ -48,7 +48,7 @@ public class Hello {
      */
     public native void setJavaIntArray(int[] javaIntArray, int size);
 
-    public void throwableMethod() throws NullPointerException{
+    public void throwableMethod() throws NullPointerException {
         throw new NullPointerException("null pointer");
     }
 
@@ -56,5 +56,7 @@ public class Hello {
      * 处理异常情况
      */
     public native void handleThrowable();
+
+    public native int nativeIODemo();
 
 }

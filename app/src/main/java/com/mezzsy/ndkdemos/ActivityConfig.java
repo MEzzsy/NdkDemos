@@ -1,7 +1,7 @@
-package com.mezzsy.myapplication;
+package com.mezzsy.ndkdemos;
 
-import com.mezzsy.myapplication.hello.HelloActivity;
-import com.mezzsy.myapplication.zcommon.BaseActivity;
+import com.mezzsy.ndkdemos.hello.HelloActivity;
+import com.mezzsy.ndkdemos.zcommon.BaseActivity;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

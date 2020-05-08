@@ -1,12 +1,11 @@
-package com.mezzsy.myapplication.hello;
+package com.mezzsy.ndkdemos.hello;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.mezzsy.myapplication.R;
-import com.mezzsy.myapplication.zcommon.BaseActivity;
+import com.mezzsy.ndkdemos.R;
+import com.mezzsy.ndkdemos.zcommon.BaseActivity;
 import com.mezzsy.swig.Unix;
 
 import java.util.Arrays;

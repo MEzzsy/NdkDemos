@@ -5,6 +5,7 @@
 #include <string>
 //NDK日志库
 #include <android/log.h>
+#include "fstream"
 
 #define LOG_TAG "Hello"
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
@@ -18,7 +19,7 @@ using namespace std;
  */
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_mezzsy_myapplication_hello_Hello_hello(JNIEnv *env, jobject thiz) {
+Java_com_mezzsy_ndkdemos_hello_Hello_hello(JNIEnv *env, jobject thiz) {
     //访问Java域
     //1。获取class对象
     jclass clazz = env->GetObjectClass(thiz);
@@ -58,7 +59,7 @@ Java_com_mezzsy_myapplication_hello_Hello_hello(JNIEnv *env, jobject thiz) {
  */
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_mezzsy_myapplication_hello_Hello_getCppString(JNIEnv *env, jobject thiz) {
+Java_com_mezzsy_ndkdemos_hello_Hello_getCppString(JNIEnv *env, jobject thiz) {
     return env->NewStringUTF("hello from cpp!");
 }
 
@@ -67,7 +68,7 @@ Java_com_mezzsy_myapplication_hello_Hello_getCppString(JNIEnv *env, jobject thiz
  */
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_mezzsy_myapplication_hello_Hello_setJavaString(JNIEnv *env, jobject thiz,
+Java_com_mezzsy_ndkdemos_hello_Hello_setJavaString(JNIEnv *env, jobject thiz,
                                                         jstring java_string) {
     jboolean is_copy = JNI_FALSE;//返回的C字符串地址是指向副本还是指向堆中的固定对象
     const char *cpp_string = env->GetStringUTFChars(java_string, &is_copy);
@@ -80,7 +81,7 @@ Java_com_mezzsy_myapplication_hello_Hello_setJavaString(JNIEnv *env, jobject thi
  */
 extern "C"
 JNIEXPORT jintArray JNICALL
-Java_com_mezzsy_myapplication_hello_Hello_getCppIntArray(JNIEnv *env,
+Java_com_mezzsy_ndkdemos_hello_Hello_getCppIntArray(JNIEnv *env,
                                                          jobject thiz, jint size) {
     jintArray java_int_array = env->NewIntArray(size);
     return java_int_array;//暂未了解能不能对jintArray进行操作。
@@ -91,7 +92,7 @@ Java_com_mezzsy_myapplication_hello_Hello_getCppIntArray(JNIEnv *env,
  */
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_mezzsy_myapplication_hello_Hello_setJavaIntArray(JNIEnv *env, jobject thiz,
+Java_com_mezzsy_ndkdemos_hello_Hello_setJavaIntArray(JNIEnv *env, jobject thiz,
                                                           jintArray java_int_array, jint size) {
     //创建Java数组的副本
     jint cpp_int_array_copy[size];
@@ -111,7 +112,7 @@ Java_com_mezzsy_myapplication_hello_Hello_setJavaIntArray(JNIEnv *env, jobject t
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_mezzsy_myapplication_hello_Hello_handleThrowable(JNIEnv *env, jobject thiz) {
+Java_com_mezzsy_ndkdemos_hello_Hello_handleThrowable(JNIEnv *env, jobject thiz) {
 
     jclass clazz = env->GetObjectClass(thiz);
     jmethodID throwableMethodId = env->GetMethodID(clazz, "throwableMethod", "()V");
@@ -121,5 +122,12 @@ Java_com_mezzsy_myapplication_hello_Hello_handleThrowable(JNIEnv *env, jobject t
         LOGI("异常出现");
         env->ExceptionClear();//显式地清除异常
     }
+}
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_mezzsy_ndkdemos_hello_Hello_nativeIODemo(JNIEnv *env, jobject thiz) {
+//    ofstream fout("/data/data/com.mezzsy.ndj");
+    return 1;
 }
 

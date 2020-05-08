@@ -1,4 +1,4 @@
-package com.mezzsy.myapplication.zcommon;
+package com.mezzsy.ndkdemos.zcommon;
 
 
 import androidx.appcompat.app.AppCompatActivity;
