@@ -5,7 +5,7 @@
 #include <string>
 //NDK日志库
 #include <android/log.h>
-#include "fstream"
+#include "stdio.h"
 
 #define LOG_TAG "Hello"
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
@@ -69,7 +69,7 @@ Java_com_mezzsy_ndkdemos_hello_Hello_getCppString(JNIEnv *env, jobject thiz) {
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_mezzsy_ndkdemos_hello_Hello_setJavaString(JNIEnv *env, jobject thiz,
-                                                        jstring java_string) {
+                                                   jstring java_string) {
     jboolean is_copy = JNI_FALSE;//返回的C字符串地址是指向副本还是指向堆中的固定对象
     const char *cpp_string = env->GetStringUTFChars(java_string, &is_copy);
     LOGI("%s", cpp_string);
@@ -82,7 +82,7 @@ Java_com_mezzsy_ndkdemos_hello_Hello_setJavaString(JNIEnv *env, jobject thiz,
 extern "C"
 JNIEXPORT jintArray JNICALL
 Java_com_mezzsy_ndkdemos_hello_Hello_getCppIntArray(JNIEnv *env,
-                                                         jobject thiz, jint size) {
+                                                    jobject thiz, jint size) {
     jintArray java_int_array = env->NewIntArray(size);
     return java_int_array;//暂未了解能不能对jintArray进行操作。
 }
@@ -93,7 +93,7 @@ Java_com_mezzsy_ndkdemos_hello_Hello_getCppIntArray(JNIEnv *env,
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_mezzsy_ndkdemos_hello_Hello_setJavaIntArray(JNIEnv *env, jobject thiz,
-                                                          jintArray java_int_array, jint size) {
+                                                     jintArray java_int_array, jint size) {
     //创建Java数组的副本
     jint cpp_int_array_copy[size];
     env->GetIntArrayRegion(java_int_array, 0, size, cpp_int_array_copy);
@@ -125,9 +125,27 @@ Java_com_mezzsy_ndkdemos_hello_Hello_handleThrowable(JNIEnv *env, jobject thiz) 
 }
 
 extern "C"
-JNIEXPORT jint JNICALL
+JNIEXPORT jstring JNICALL
 Java_com_mezzsy_ndkdemos_hello_Hello_nativeIODemo(JNIEnv *env, jobject thiz) {
-//    ofstream fout("/data/data/com.mezzsy.ndj");
-    return 1;
+    FILE *out = fopen("/data/data/com.mezzsy.ndkdemos/test.txt", "w");//打开流
+    if (out == NULL) {
+        string res = "文件无法打开";
+        return env->NewStringUTF(res.c_str());
+    } else {
+        if (0 > fprintf(out, "zzsy is great")) {
+            string res = "文件写入错误";
+            return env->NewStringUTF(res.c_str());
+        }
+    }
+    fclose(out);//关闭流
+
+    FILE *in = fopen("/data/data/com.mezzsy.ndkdemos/test.txt", "r");//打开流
+    char buff[15];
+    if (NULL == fgets(buff, 15, in)) {
+        string res = "文件读取错误";
+        return env->NewStringUTF(res.c_str());
+    }
+    fclose(in);
+    return env->NewStringUTF(buff);
 }
 

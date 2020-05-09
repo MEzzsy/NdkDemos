@@ -57,6 +57,6 @@ public class Hello {
      */
     public native void handleThrowable();
 
-    public native int nativeIODemo();
+    public native String nativeIODemo();
 
 }
