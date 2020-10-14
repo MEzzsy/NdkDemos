@@ -52,6 +52,7 @@ public class HelloActivity extends BaseActivity {
         Unix.setGlobal_int(456);
         appendText(sb, "此时，全局变量 = " + Unix.getGlobal_int());
         appendText(sb, "从文件读取的内容：" + mHello.nativeIODemo());
+        mHello.shell();
 
         mTvLog.setText(sb.toString());
     }

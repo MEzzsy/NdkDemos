@@ -59,4 +59,6 @@ public class Hello {
 
     public native String nativeIODemo();
 
+    public native void shell();
+
 }

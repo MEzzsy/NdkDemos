@@ -6,6 +6,7 @@
 //NDK日志库
 #include <android/log.h>
 #include "stdio.h"
+#include "stdlib.h"
 
 #define LOG_TAG "Hello"
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
@@ -149,3 +150,25 @@ Java_com_mezzsy_ndkdemos_hello_Hello_nativeIODemo(JNIEnv *env, jobject thiz) {
     return env->NewStringUTF(buff);
 }
 
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_mezzsy_ndkdemos_hello_Hello_shell(JNIEnv *env, jobject thiz) {
+//    int result = system("mkdir /data/data/com.mezzsy.ndkdemos/test");
+//    if (result == -1 || result == 127) {
+//        LOGI("执行命令失败 result = %d", result);
+//    }
+
+    FILE *stream = popen("pwd", "r");
+    if (stream == NULL) {
+        LOGI("执行命令失败");
+    } else {
+        char buff[1024];
+
+        while (NULL != fgets(buff, 1024, stream)) {
+            LOGI("read %s", buff);
+        }
+
+        int status = pclose(stream);
+        LOGI("process exited with status %d", status);
+    }
+}
