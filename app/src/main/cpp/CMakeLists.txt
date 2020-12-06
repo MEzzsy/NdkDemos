@@ -5,11 +5,18 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+#导入文件
+include_directories("${PROJECT_SOURCE_DIR}/swig")
+include_directories("${PROJECT_SOURCE_DIR}/impl")
+
+set(SWIG_SOURCE)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+# 在这添加lib。一个lib对应一个add_library
 add_library( # Sets the name of the library.
              native-lib
 
@@ -34,6 +41,7 @@ add_library( # Sets the name of the library.
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
+# 相当于依赖lib
 find_library( # Sets the name of the path variable.
               log-lib
 
@@ -45,6 +53,7 @@ find_library( # Sets the name of the path variable.
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
+# 使用lib
 target_link_libraries( # Specifies the target library.
                        native-lib
 

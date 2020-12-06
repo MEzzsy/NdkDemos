@@ -1,7 +1,6 @@
 package com.mezzsy.myapplication.hello;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,8 +12,12 @@ public class HelloActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello);
-        TextView textView = findViewById(R.id.tv_text);
+
+        testHello();
+    }
+
+    private void testHello() {
         Hello hello = new Hello();
-        textView.setText(hello.hello());
+        hello.hello();
     }
 }
