@@ -9,7 +9,9 @@ cmake_minimum_required(VERSION 3.4.1)
 include_directories("${PROJECT_SOURCE_DIR}/swig")
 include_directories("${PROJECT_SOURCE_DIR}/impl")
 
-set(SWIG_SOURCE)
+set(SWIG_SOURCE
+        swig/my_swig_wrap.cxx
+        impl/swig_impl.cpp)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -34,6 +36,15 @@ add_library( # Sets the name of the library.
 
         # Provides a relative path to your source file(s).
         hello-lib.cpp )
+
+add_library( # Sets the name of the library.
+        my-swig
+
+        # Sets the library as a shared library.
+        SHARED
+
+        # Provides a relative path to your source file(s).
+        ${SWIG_SOURCE} )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -60,3 +71,10 @@ target_link_libraries( # Specifies the target library.
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )
+
+target_link_libraries( # Specifies the target library.
+        my-swig
+
+        # Links the target library to the log library
+        # included in the NDK.
+        ${log-lib} )

@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mezzsy.myapplication.hello.HelloActivity;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 

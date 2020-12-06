@@ -44,3 +44,30 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+/**
+ * 生成Swig的脚本
+ */
+def mainDir = "${projectDir}/src/main"//main目录
+def swigJavaSrc = "${mainDir}/java/com/mezzsy/myapplication/swig"//swig输出目录，需要存在此目录
+
+task clearSwig(type: Delete) {
+    delete fileTree(swigJavaSrc) {
+        include '*.java'
+    }
+}
+
+/**
+ * 生成之前先清空原来的Swig
+ * type类型是命令
+ */
+task generateSwig(type: Exec, dependsOn: "clearSwig") {
+    String osName = System.getProperty("os.name").toLowerCase()
+    if (osName.contains("mac")) {
+        commandLine 'swig'
+        args '-c++', '-java',
+                '-package', 'com.mezzsy.myapplication.swig',//包名
+                '-outdir', "${swigJavaSrc}",
+                "${mainDir}/cpp/swig/my_swig.i"//swig的.i文件
+    }
+}
